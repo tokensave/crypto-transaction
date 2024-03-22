@@ -8,6 +8,7 @@ use App\Enums\CryptoActiveEnum;
 use App\Enums\CryptoExchangeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Deal extends Model
@@ -32,4 +33,8 @@ class Deal extends Model
         'provider' => BanksEnum::class,
     ];
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

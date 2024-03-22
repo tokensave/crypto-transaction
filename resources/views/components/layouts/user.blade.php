@@ -36,6 +36,11 @@
                                     Главная панель
                                 </a>
 
+                                <a href="{{ route('dashboard.check') }}" class="block px-3 py-1 text-sm leading-6 text-gray-900"
+                                   role="menuitem" tabindex="-1" id="user-menu-item-0">
+                                    Сделки
+                                </a>
+
                                 <a href="{{ route('user.settings') }}" class="block px-3 py-1 text-sm leading-6 text-gray-900" role="menuitem" tabindex="-1" id="user-menu-item-0">
                                     Настройки
                                 </a>

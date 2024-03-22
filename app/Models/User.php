@@ -52,4 +52,9 @@ class User extends Authenticatable
             'password_at' => now(),
         ]);
     }
+
+    public function deals()
+    {
+        return $this->hasMany(Deal::class);
+    }
 }

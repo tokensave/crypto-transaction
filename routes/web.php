@@ -39,9 +39,7 @@ Route::middleware(['auth', 'online'])->group(function () {
     Route::post('/user/settings/password', [UserPasswordController::class, 'update'])->name('user.settings.password.update');
     Route::view('/dashboard', 'dashboard.index')->name('dashboard.index');
     Route::post('/dashboard/store', [DashboardController::class, 'store'])->name('dashboard.store');
-
+    Route::get('/dashboard/check', [DashboardController::class, 'check'])->name('dashboard.check');
 });
 
-Route::get('test', function (){
-    return (new ConfirmNotification())->toMail(User::query()->first());
-});
+Route::view('/test', 'test');

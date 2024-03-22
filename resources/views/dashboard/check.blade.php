@@ -57,70 +57,43 @@
         </div>
     </div>
 
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
-    <form action="{{ route('dashboard.store') }}" method="POST">
-        @csrf
-        <div class="flex items-center justify-center min-h-screen bg-gray-900">
+
+    <div class="flex items-center justify-center min-h-screen bg-gray-900">
+        <div class="col-span-12">
             <x-table>
+
                 <x-table.trow>
 
                     <x-table.thead>Актив</x-table.thead>
-                    <x-table.thead>Биржа</x-table.thead>
                     <x-table.thead>Действие с активом</x-table.thead>
                     <x-table.thead>Курс</x-table.thead>
                     <x-table.thead>Сумма</x-table.thead>
                     <x-table.thead>Банк</x-table.thead>
+                    <x-table.thead>Биржа</x-table.thead>
                     <x-table.thead>Идентификатор сделки</x-table.thead>
-                    <x-table.thead>Добавить</x-table.thead>
+                    <x-table.thead>Количество актива</x-table.thead>
 
                 </x-table.trow>
 
+                @foreach($deals as $deal)
                 <x-table.trow>
-
-                    <x-table.tbody>
-                        <x-form.select name="active" :options="App\Enums\CryptoActiveEnum::select()"
-                                       class="bg-transparent"/>
-                    </x-table.tbody>
-
-                    <x-table.tbody>
-                        <x-form.select name="crypto_exchange" :options="App\Enums\CryptoExchangeEnum::select()"
-                                       class="bg-transparent"/>
-                    </x-table.tbody>
-
-                    <x-table.tbody>
-                        <x-form.select name="action" :options="App\Enums\ActionsActiveEnum::select()"
-                                       class="bg-transparent"/>
-                    </x-table.tbody>
-
-                    <x-table.tbody>
-                        <input type="text" name="course" class="bg-transparent border-none text-white w-full"
-                               placeholder="Введите курс">
-                    </x-table.tbody>
-
-                    <x-table.tbody>
-                        <input type="text" name="sum" class="bg-transparent border-none text-white w-full"
-                               placeholder="Введите сумму">
-                    </x-table.tbody>
-
-                    <x-table.tbody>
-                        <x-form.select name="provider" :options="App\Enums\BanksEnum::select()"
-                                       class="bg-transparent"/>
-                    </x-table.tbody>
-
-                    <x-table.tbody>
-                        <input type="text" name="deal_id" class="bg-transparent border-none text-white w-full"
-                               placeholder="Введите id сделки">
-                    </x-table.tbody>
-
-                    <td class="p-3 flex justify-center items-center">
-                        <button type="submit" class="text-gray-400 hover:text-gray-100 mr-2 mt-3">
-                            <span class="material-symbols-outlined">add</span>
-                        </button>
-                    </td>
+                    @foreach($deals as $deal)
+                        <x-table.trow>
+                            <x-table.tbody>{{ $deal->active->name() }}</x-table.tbody>
+                            <x-table.tbody>{{ $deal->action->name() }}</x-table.tbody>
+                            <x-table.tbody>{{ $deal->course }}</x-table.tbody>
+                            <x-table.tbody>{{ $deal->sum }}</x-table.tbody>
+                            <x-table.tbody>{{ $deal->provider->name() }}</x-table.tbody>
+                            <x-table.tbody>{{ $deal->crypto_exchange->name() }}</x-table.tbody>
+                            <x-table.tbody>{{ $deal->deal_id }}</x-table.tbody>
+                            <x-table.tbody>{{ $deal->course * $deal->sum }}</x-table.tbody> <!-- Результат вычисления -->
+                        </x-table.trow>
+                    @endforeach
 
                 </x-table.trow>
+                @endforeach
             </x-table>
         </div>
-    </form>
+    </div>
+
 </x-layouts.base>
