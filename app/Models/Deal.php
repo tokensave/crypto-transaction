@@ -6,10 +6,10 @@ use App\Enums\ActionsActiveEnum;
 use App\Enums\BanksEnum;
 use App\Enums\CryptoActiveEnum;
 use App\Enums\CryptoExchangeEnum;
+use App\Support\Values\AmountValue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Deal extends Model
 {
@@ -31,10 +31,18 @@ class Deal extends Model
         'crypto_exchange' => CryptoExchangeEnum::class,
         'action' => ActionsActiveEnum::class,
         'provider' => BanksEnum::class,
+        'course' => AmountValue::class,
+        'sum' => AmountValue::class
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
+
+    public function totalAmount(): string
+    {
+        return bcdiv($this->sum->value(), $this->course->value(), 2);
+    }
+
 }

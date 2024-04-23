@@ -6,6 +6,7 @@ use App\Enums\ActionsActiveEnum;
 use App\Enums\BanksEnum;
 use App\Enums\CryptoActiveEnum;
 use App\Enums\CryptoExchangeEnum;
+use App\Support\Values\AmountValue;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -20,7 +21,7 @@ class StoreRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'user_id' => $this->user()->id
+            'user_id' => $this->user()->id,
         ]);
     }
 

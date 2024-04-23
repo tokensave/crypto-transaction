@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('active')->nullable('false')->comment('Актив');
             $table->string('crypto_exchange')->nullable('false')->comment('Криптобиржа');
             $table->string('action')->nullable('false')->comment('Действие с активом');
-            $table->string('course')->nullable('false')->comment('Курс');
-            $table->string('sum')->nullable('false')->comment('Сумма');
+            $table->decimal('course',12,2)->nullable('false')->comment('Курс');
+            $table->decimal('sum',12,2)->nullable('false')->comment('Сумма');
             $table->string('provider')->nullable('false')->comment('Банк');
             $table->string('deal_id')->nullable('false')->comment('Идентификатор сделки');
         });

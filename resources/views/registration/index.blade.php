@@ -32,7 +32,7 @@
                     <x-form.checkbox name="agreement" lable="Remember me">Принимаю соглашение</x-form.checkbox>
                 </x-form.item>
 
-                <x-button type="submit">Войти</x-button>
+                <x-button type="submit">Зарегистрироваться</x-button>
 
             </x-form>
         </x-card.body>

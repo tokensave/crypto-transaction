@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use App\Enums\CryptoExchangeEnum;
+use App\Support\Values\AmountValue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,7 +22,9 @@ class User extends Authenticatable
         'password',
         'online_at',
         'crypto_exchange',
-        'password_at'
+        'password_at',
+        'email_confirmed_at',
+        'money_capital'
     ];
 
     protected $hidden = [
@@ -33,7 +36,9 @@ class User extends Authenticatable
         'password' => 'hashed',
         'online_at' => 'datetime',
         'crypto_exchange' => CryptoExchangeEnum::class,
-        'password_at' => 'datetime'
+        'password_at' => 'datetime',
+        'email_confirmed_at' => 'datetime',
+        'money_capital' => AmountValue::class
     ];
 
     public function getFullName()
@@ -56,5 +61,15 @@ class User extends Authenticatable
     public function deals()
     {
         return $this->hasMany(Deal::class);
+    }
+
+    public function isEmailConfirm(): bool
+    {
+        return (bool) $this->email_confirmed_at;
+    }
+
+    public function confirmEmail(): bool
+    {
+        return $this->update(['email_confirmed_at' => now()]);
     }
 }

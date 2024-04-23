@@ -14,13 +14,16 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->timestamp('online_at')->nullable();
 
             $table->string('first_name')->comment('Имя');
             $table->string('middle_name')->nullable()->comment('Отчество');
             $table->string('last_name')->nullable()->comment('Фамилия');
 
             $table->string('crypto_exchange', 10)->nullable()->comment('Крипто Биржа');
+            $table->decimal('money_capital', 12, 2)->nullable()->comment('Денежный капитал');
             $table->string('email')->unique();
+            $table->timestamp('email_confirmed_at')->nullable();
 
             $table->string('password');
             $table->timestamp('password_at')->nullable();

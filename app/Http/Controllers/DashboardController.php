@@ -2,25 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Deal\CapitalChangeRequest;
 use App\Http\Requests\Deal\StoreRequest;
-use App\Models\Deal;
+use App\Services\Deals\DealService;
 use Illuminate\Http\Request;
+use Throwable;
 
 class DashboardController extends Controller
 {
-    public function store(StoreRequest $request)
+    /**
+     * @throws Throwable
+     */
+    public function store(StoreRequest $request, DealService $dealService)
     {
-        $deal = Deal::query()->create($request->validated());
-
-        //отобразить уведомление что все ок
-        return to_route('dashboard.check');
+        $dealService->createDeal($request->validated());
+        return redirect()->route('dashboard.check');
     }
 
-    public function check(Request $request)
+    public function check(Request $request, DealService $dealService)
     {
-        $user = $request->user();
-        $deals = $user->deals()->get();
-
+        $deals = $dealService->getDeals($request->user());
         return view('dashboard.check', compact('deals'));
+    }
+
+    public function capital(CapitalChangeRequest $request, DealService $dealService)
+    {
+        $dealService->changeUserCapital($request->validated(), $request->user());
+        return back();
+    }
+
+    public function calculate(Request $request, DealService $dealService)
+    {
+        $value = $request->only('calculate');
+        $deals = $request->user()->deals()->get();
+        $profit = null;
+        $activeCount = null;
+        switch ($value['calculate']) {
+            case 'profit':
+                $profit = $dealService->calculateProfit($deals);
+                break;
+            case 'active':
+                $activeCount = $dealService->calculateActive($deals);
+                break;
+        }
+        return view('dashboard.check',  compact('deals', 'profit', 'activeCount'));
     }
 }

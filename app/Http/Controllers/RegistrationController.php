@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\User\UserCreateEvent;
 use App\Http\Requests\Registration\StoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,6 +15,8 @@ class RegistrationController extends Controller
         $data = $request->validated();
 
         $user = User::query()->create($data);
+
+        event(new UserCreateEvent($user));
 
         Auth::login($user);
 

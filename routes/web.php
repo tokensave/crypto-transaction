@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PasswordController;
@@ -8,8 +9,9 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\User\Settings\PasswordController as UserPasswordController;
 use App\Http\Controllers\User\Settings\ProfileController;
 use App\Http\Controllers\User\SettingsController;
+use App\Models\Email;
 use App\Models\User;
-use App\Notifications\Password\ConfirmNotification;
+use App\Notifications\Email\ConfirmEmailNotification;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/registration');
@@ -28,6 +30,12 @@ Route::middleware('guest')->group(function () {
     Route::post('/password/{password:uuid}', [PasswordController::class, 'update'])->name('password.update')->whereUuid('password');
 });
 
+
+    Route::get('email/confirmation', [EmailController::class, 'confirmation'])->name('email.confirmation')->middleware('auth');
+    Route::any('email/{email:uuid}/confirm', [EmailController::class, 'confirm'])->name('email.confirm')->whereUuid('email');
+    Route::post('email/{email:uuid}/send', [EmailController::class, 'send'])->name('email.send')->whereUuid('email');
+
+
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::middleware(['auth', 'online'])->group(function () {
@@ -37,9 +45,16 @@ Route::middleware(['auth', 'online'])->group(function () {
     Route::post('/user/settings/profile', [ProfileController::class, 'update'])->name('user.settings.profile.update');
     Route::get('/user/settings/password', [UserPasswordController::class, 'edit'])->name('user.settings.password.edit');
     Route::post('/user/settings/password', [UserPasswordController::class, 'update'])->name('user.settings.password.update');
-    Route::view('/dashboard', 'dashboard.index')->name('dashboard.index');
-    Route::post('/dashboard/store', [DashboardController::class, 'store'])->name('dashboard.store');
-    Route::get('/dashboard/check', [DashboardController::class, 'check'])->name('dashboard.check');
+
+    Route::middleware('email.confirm')->group(function () {
+        Route::view('/dashboard', 'dashboard.index')->name('dashboard.index');
+        Route::post('/dashboard/store', [DashboardController::class, 'store'])->name('dashboard.store');
+        Route::get('/dashboard/check', [DashboardController::class, 'check'])->name('dashboard.check');
+        Route::post('/dashboard/capital', [DashboardController::class, 'capital'])->name('dashboard.capital');
+        Route::get('/dashboard/calculate', [DashboardController::class, 'calculate'])->name('dashboard.calculate');
+
+    });
 });
 
 Route::view('/test', 'test');
+
