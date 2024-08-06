@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\User\Settings\PasswordController as UserPasswordController;
 use App\Http\Controllers\User\Settings\ProfileController;
 use App\Http\Controllers\User\SettingsController;
@@ -13,6 +14,7 @@ use App\Models\Email;
 use App\Models\User;
 use App\Notifications\Email\ConfirmEmailNotification;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::redirect('/', '/registration');
 
@@ -38,6 +40,7 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout')->middleware('auth');
 
+
 Route::middleware(['auth', 'online'])->group(function () {
     Route::redirect('/user', '/user/settings')->name('user');
     Route::get('/user/settings', [SettingsController::class, 'index'])->name('user.settings');
@@ -55,6 +58,11 @@ Route::middleware(['auth', 'online'])->group(function () {
 
     });
 });
+
+
+Route::get('/social/{driver}/redirect', [SocialController::class, 'redirect'])->name('social.redirect');
+
+Route::get('/social/{driver}/callback', [SocialController::class, 'callback'])->name('social.callback');
 
 Route::view('/test', 'test');
 

@@ -31,4 +31,23 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => env('APP_URL').'/social/github/callback',
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('APP_URL').'/social/google/callback',
+    ],
+
+    'telegram' => [
+        'bot' => env('TELEGRAM_BOT_NAME'),
+        'client_id' => null,
+        'client_secret' => env('TELEGRAM_TOKEN'),
+        'redirect' => env('APP_URL').'/social/telegram/callback',
+    ],
+
 ];
