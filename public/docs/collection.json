@@ -1,0 +1,132 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/127.0.0.1:8000"
+        }
+    ],
+    "info": {
+        "name": "Laravel",
+        "_postman_id": "a3291099-f319-456f-9001-4529f20f67c5",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "GET api\/user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/user"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "GET api\/users",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/users"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "57"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "[{\"id\":1,\"created_at\":\"2024-06-10T14:05:26.000000Z\",\"updated_at\":\"2024-06-17T08:22:44.000000Z\",\"online_at\":\"2024-06-17T08:22:44.000000Z\",\"first_name\":null,\"middle_name\":null,\"last_name\":null,\"crypto_exchange\":null,\"money_capital\":null,\"email\":null,\"email_confirmed_at\":null,\"password_at\":null},{\"id\":2,\"created_at\":\"2024-06-13T13:00:13.000000Z\",\"updated_at\":\"2024-06-13T13:00:13.000000Z\",\"online_at\":\"2024-06-13T13:00:13.000000Z\",\"first_name\":null,\"middle_name\":null,\"last_name\":null,\"crypto_exchange\":null,\"money_capital\":null,\"email\":null,\"email_confirmed_at\":null,\"password_at\":null},{\"id\":3,\"created_at\":\"2024-06-14T14:04:34.000000Z\",\"updated_at\":\"2024-06-14T14:04:34.000000Z\",\"online_at\":\"2024-06-14T14:04:34.000000Z\",\"first_name\":null,\"middle_name\":null,\"last_name\":null,\"crypto_exchange\":null,\"money_capital\":null,\"email\":null,\"email_confirmed_at\":null,\"password_at\":null}]",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}

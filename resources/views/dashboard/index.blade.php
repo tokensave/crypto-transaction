@@ -2,8 +2,6 @@
     <div class="lg:pl-72 bg-gray-900">
         <div
             class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 px-4 lg:px-8 bg-gray-900 text-white justify-end">
-            <div class="flex items-center gap-x-4 lg:gap-x-6 bg-gray-900">
-
                 <div x-data="{ open: false}" class="relative">
                     <button x-on:click="open = true" type="button" class="-m-1.5 flex items-center p-1.5"
                             id="user-menu-button" aria-expanded="false" aria-haspopup="true">
@@ -50,22 +48,22 @@
                         </a>
                     </div>
                 </div>
-
-            </div>
         </div>
     </div>
 
-    <form action="{{ route('dashboard.capital') }}" method="POST" class="flex items-center justify-center gap-x-4 bg-gray-900">
-        @csrf
-        <input type="text" name="money_capital" placeholder="Ваш обьем капитала" class="rounded-lg px-3 py-1 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-indigo-300">
-        <button type="submit" class="px-4 py-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">Добавить количество денежных средств</button>
-    </form>
+    <div class="flex flex-column justify-center">
+        <form action="{{ route('dashboard.capital') }}" method="POST" class="flex items-center justify-center gap-x-4 bg-gray-900">
+            @csrf
+            <input type="text" name="money_capital" placeholder="Ваш обьем капитала" class="rounded-lg px-3 py-1 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-indigo-300">
+            <button type="submit" class="px-4 py-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">Добавить количество денежных средств</button>
+        </form>
+    </div>
 
-    <form action="{{ route('dashboard.store') }}" method="POST">
-        @csrf
-        <div class="flex items-center justify-center min-h-screen bg-gray-900">
-            <x-table>
-                <x-table.trow>
+    <div class="flex items-up justify-center min-h-screen bg-gray-900">
+        <form action="{{ route('dashboard.store') }}" method="POST">
+            @csrf
+                <x-table>
+                    <x-table.trow>
 
                     <x-table.thead>Актив</x-table.thead>
                     <x-table.thead>Биржа</x-table.thead>
@@ -76,49 +74,50 @@
                     <x-table.thead>Идентификатор сделки</x-table.thead>
                     <x-table.thead>Добавить</x-table.thead>
 
-                </x-table.trow>
+                    </x-table.trow>
 
-                <x-table.trow>
+                    <x-table.trow>
 
                     <x-table.tbody>
                         <x-table.select name="active" :options="App\Enums\CryptoActiveEnum::select()" class="bg-transparent" placeholder="Выбрать"/>
                     </x-table.tbody>
 
-                    <x-table.tbody>
-                        <x-table.select name="crypto_exchange" :options="App\Enums\CryptoExchangeEnum::select()"
-                                       class="bg-transparent"  placeholder="Выбрать"/>
-                    </x-table.tbody>
+                        <x-table.tbody>
+                            <x-table.select name="crypto_exchange" :options="App\Enums\CryptoExchangeEnum::select()"
+                                            class="bg-transparent"  placeholder="Выбрать"/>
+                        </x-table.tbody>
 
-                    <x-table.tbody>
-                        <x-table.select name="action" :options="App\Enums\ActionsActiveEnum::select()"
-                                       class="bg-transparent"  placeholder="Выбрать"/>
-                    </x-table.tbody>
+                        <x-table.tbody>
+                            <x-table.select name="action" :options="App\Enums\ActionsActiveEnum::select()"
+                                            class="bg-transparent"  placeholder="Выбрать"/>
+                        </x-table.tbody>
 
-                    <x-table.tbody>
-                        <x-table.text type="text" name="course" placeholder="Введите курс"/>
-                    </x-table.tbody>
+                        <x-table.tbody>
+                            <x-table.text type="text" name="course" placeholder="Введите курс"/>
+                        </x-table.tbody>
 
-                    <x-table.tbody>
-                        <x-table.text type="text" name="sum" placeholder="Введите сумму"/>
-                    </x-table.tbody>
+                        <x-table.tbody>
+                            <x-table.text type="text" name="sum" placeholder="Введите сумму"/>
+                        </x-table.tbody>
 
-                    <x-table.tbody>
-                        <x-table.select name="provider" :options="App\Enums\BanksEnum::select()"
-                                       class="bg-transparent"  placeholder="Выбрать"/>
-                    </x-table.tbody>
+                        <x-table.tbody>
+                            <x-table.select name="provider" :options="App\Enums\BanksEnum::select()"
+                                            class="bg-transparent"  placeholder="Выбрать"/>
+                        </x-table.tbody>
 
-                    <x-table.tbody>
-                        <x-table.text type="text" name="deal_id" placeholder="Введите id сделки"/>
-                    </x-table.tbody>
+                        <x-table.tbody>
+                            <x-table.text type="text" name="deal_id" placeholder="Введите id сделки"/>
+                        </x-table.tbody>
 
-                    <td class="p-3 flex justify-center items-center">
-                        <button type="submit" class="text-gray-400 hover:text-gray-100 mr-2 mt-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24" id="Check-Double--Streamline-Cyber"><desc>Check Double Streamline Icon: https://streamlinehq.com</desc><path stroke="#1023c7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M2.0868 12.5113L0.7513 14.5565L7.3983 22.2261L18.1356 1.7739L5.8644 15.5791L2.0868 12.5113Z" stroke-width="1"></path><path stroke="#1023c7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M11.4887 19.1583L14.0452 21.2035L23.2487 2.7965L15.0944 11.728" stroke-width="1"></path></svg>
-                        </button>
-                    </td>
+                        <td class="p-3 flex justify-center items-center">
+                            <button type="submit" class="text-gray-400 hover:text-gray-100 mr-2 mt-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" height="24" width="24" id="Check-Double--Streamline-Cyber"><desc>Check Double Streamline Icon: https://streamlinehq.com</desc><path stroke="#1023c7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M2.0868 12.5113L0.7513 14.5565L7.3983 22.2261L18.1356 1.7739L5.8644 15.5791L2.0868 12.5113Z" stroke-width="1"></path><path stroke="#1023c7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M11.4887 19.1583L14.0452 21.2035L23.2487 2.7965L15.0944 11.728" stroke-width="1"></path></svg>
+                            </button>
+                        </td>
 
-                </x-table.trow>
-            </x-table>
-        </div>
-    </form>
+                    </x-table.trow>
+                </x-table>
+        </form>
+    </div>
+
 </x-layouts.base>
