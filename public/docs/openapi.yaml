@@ -1,0 +1,93 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://127.0.0.1:8000'
+paths:
+  /api/user:
+    get:
+      summary: ''
+      operationId: getApiUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/users:
+    get:
+      summary: ''
+      operationId: getApiUsers
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    id: 1
+                    created_at: '2024-06-10T14:05:26.000000Z'
+                    updated_at: '2024-06-17T08:22:44.000000Z'
+                    online_at: '2024-06-17T08:22:44.000000Z'
+                    first_name: null
+                    middle_name: null
+                    last_name: null
+                    crypto_exchange: null
+                    money_capital: null
+                    email: null
+                    email_confirmed_at: null
+                    password_at: null
+                  -
+                    id: 2
+                    created_at: '2024-06-13T13:00:13.000000Z'
+                    updated_at: '2024-06-13T13:00:13.000000Z'
+                    online_at: '2024-06-13T13:00:13.000000Z'
+                    first_name: null
+                    middle_name: null
+                    last_name: null
+                    crypto_exchange: null
+                    money_capital: null
+                    email: null
+                    email_confirmed_at: null
+                    password_at: null
+                  -
+                    id: 3
+                    created_at: '2024-06-14T14:04:34.000000Z'
+                    updated_at: '2024-06-14T14:04:34.000000Z'
+                    online_at: '2024-06-14T14:04:34.000000Z'
+                    first_name: null
+                    middle_name: null
+                    last_name: null
+                    crypto_exchange: null
+                    money_capital: null
+                    email: null
+                    email_confirmed_at: null
+                    password_at: null
+      tags:
+        - Endpoints
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''

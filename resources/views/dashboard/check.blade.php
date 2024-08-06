@@ -96,16 +96,19 @@
         </div>
     </div>
 
-    <form action="{{ route('dashboard.calculate') }}" method="GET" class="flex justify-center gap-x-4 bg-gray-900 p-10">
-        @csrf
-        <button type="submit" name="calculate" value="profit"
-                class="px-4 py-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">
-            Посчитать прибыль
-        </button>
-        <button type="submit" name="calculate" value="active"
-                class="px-4 py-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">
-            Посчитать активы
-        </button>
-    </form>
+    <div>
+        <form action="{{ route('dashboard.calculate') }}" method="GET" class="flex justify-center gap-x-4 bg-gray-900 p-10">
+            @csrf
+            <button type="submit" name="calculate" value="profit"
+                    class="px-4 py-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">
+                Посчитать прибыль
+            </button>
+            <button type="submit" name="calculate" value="active"
+                    class="px-4 py-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">
+                Посчитать активы
+            </button>
+        </form>
+    </div>
+
 
 </x-layouts.base>

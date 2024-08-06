@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Deal\CapitalChangeRequest;
 use App\Http\Requests\Deal\StoreRequest;
+use App\Models\User;
 use App\Services\Deals\DealService;
 use Illuminate\Http\Request;
 use Throwable;
@@ -46,5 +47,11 @@ class DashboardController extends Controller
                 break;
         }
         return view('dashboard.check',  compact('deals', 'profit', 'activeCount'));
+    }
+
+    public function getUsers(Request $request): \Illuminate\Database\Eloquent\Collection
+    {
+
+        return User::all();
     }
 }
