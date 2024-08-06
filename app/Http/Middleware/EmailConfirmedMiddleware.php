@@ -13,6 +13,9 @@ class EmailConfirmedMiddleware
     {
         $user = $request->user();
 
+        if (is_null($user->email))
+            return $next($request);
+
         if ($user->isEmailConfirm())
             return $next($request);
 
