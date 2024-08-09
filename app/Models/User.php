@@ -21,7 +21,6 @@ class User extends Authenticatable
         'email',
         'password',
         'online_at',
-        'crypto_exchange',
         'password_at',
         'email_confirmed_at',
         'money_capital'
@@ -35,7 +34,6 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
         'online_at' => 'datetime',
-        'crypto_exchange' => CryptoExchangeEnum::class,
         'password_at' => 'datetime',
         'email_confirmed_at' => 'datetime',
         'money_capital' => AmountValue::class

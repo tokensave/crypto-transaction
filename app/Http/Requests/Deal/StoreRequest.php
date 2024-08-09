@@ -20,6 +20,12 @@ class StoreRequest extends FormRequest
 
     protected function prepareForValidation()
     {
+        if ($this->crypto_exchange == CryptoExchangeEnum::garantex->value)
+        {
+            $this->merge([
+                'course' => '1',
+            ]);
+        }
         $this->merge([
             'user_id' => $this->user()->id,
         ]);

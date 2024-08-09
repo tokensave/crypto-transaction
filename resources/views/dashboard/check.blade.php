@@ -49,18 +49,27 @@
         </div>
     </div>
 
-    <div class="text-indigo-600 text-center bg-gray-900 p-10">
-        @isset($profit)
-            <p>Прибыль: {{ $profit? : null }} RUB</p>
-        @endisset
-        @isset($activeCount)
-            <p>Остаток активов {{ $activeCount }} USDT</p>
-        @endisset
-        <p>Ваш объем капитала {{ Auth::user()->money_capital?->value() }} RUB</p>
-    </div>
-
-    <div class="flex items-center justify-center min-h-screen bg-gray-900">
+    <div class="flex items-up justify-center min-h-screen bg-gray-900">
         <div class="col-span-12">
+
+            <x-table>
+
+                <x-table.trow>
+
+                    <x-table.thead>Ваш капитал</x-table.thead>
+                    <x-table.thead>Прибыль</x-table.thead>
+                    <x-table.thead>Остаток активов</x-table.thead>
+
+                </x-table.trow>
+
+                <x-table.trow>
+                        <x-table.trow>
+                            <x-table.tbody>{{ Auth::user()->money_capital?->value() }}</x-table.tbody>
+                            <x-table.tbody>{{ $profit? : null }}</x-table.tbody>
+                            <x-table.tbody>{{ $activeCount? : null }}</x-table.tbody>
+                        </x-table.trow>
+                </x-table.trow>
+            </x-table>
 
             <x-table>
 
@@ -94,20 +103,6 @@
                 </x-table.trow>
             </x-table>
         </div>
-    </div>
-
-    <div>
-        <form action="{{ route('dashboard.calculate') }}" method="GET" class="flex justify-center gap-x-4 bg-gray-900 p-10">
-            @csrf
-            <button type="submit" name="calculate" value="profit"
-                    class="px-4 py-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">
-                Посчитать прибыль
-            </button>
-            <button type="submit" name="calculate" value="active"
-                    class="px-4 py-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">
-                Посчитать активы
-            </button>
-        </form>
     </div>
 
 

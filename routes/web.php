@@ -53,9 +53,9 @@ Route::middleware(['auth', 'online'])->group(function () {
         Route::view('/dashboard', 'dashboard.index')->name('dashboard.index');
         Route::post('/dashboard/store', [DashboardController::class, 'store'])->name('dashboard.store');
         Route::get('/dashboard/check', [DashboardController::class, 'check'])->name('dashboard.check');
+        Route::post('/dashboard/calculate', [DashboardController::class, 'calculate'])->name('dashboard.calculate');
         Route::post('/dashboard/capital', [DashboardController::class, 'capital'])->name('dashboard.capital');
-        Route::get('/dashboard/calculate', [DashboardController::class, 'calculate'])->name('dashboard.calculate');
-
+        Route::post('/dashboard/check/capital/change', [DashboardController::class, 'updateMoneyCapitalUser'])->name('dashboard.capital.update');
     });
 });
 
@@ -64,5 +64,4 @@ Route::get('/social/{driver}/redirect', [SocialController::class, 'redirect'])->
 
 Route::get('/social/{driver}/callback', [SocialController::class, 'callback'])->name('social.callback');
 
-Route::view('/test', 'test');
 

@@ -5,6 +5,7 @@ namespace App\Services\Deals;
 use App\Actions\Deals\CreateDealAction;
 use App\Actions\Deals\CreateDealData;
 use App\Enums\ActionsActiveEnum;
+use App\Enums\CryptoExchangeEnum;
 use App\Models\Deal;
 use App\Models\User;
 use App\Support\Values\AmountValue;
@@ -76,12 +77,26 @@ class DealService
         $activeBuy = '0';
         $activeSell = '0';
         foreach ($deals as $deal) {
-            if ($deal->action == ActionsActiveEnum::buy) {
-                $activeBuy = bcadd($activeBuy, $deal->totalAmount(), 2);
-            } elseif ($deal->action == ActionsActiveEnum::sell) {
-                $activeSell = bcadd($activeSell, $deal->totalAmount(), 2);
+            if ($deal->crypto_exchange !== CryptoExchangeEnum::garantex) {
+                if ($deal->action == ActionsActiveEnum::buy) {
+                    $activeBuy = bcadd($activeBuy, $deal->totalAmount(), 2);
+                } elseif ($deal->action == ActionsActiveEnum::sell) {
+                    $activeSell = bcadd($activeSell, $deal->totalAmount(), 2);
+                }
+            } else {
+                if ($deal->action == ActionsActiveEnum::buy) {
+                    $activeBuy = bcadd($activeBuy, 1, 2);
+                } elseif ($deal->action == ActionsActiveEnum::sell) {
+                    $activeSell = bcadd($activeSell, 1, 2);
+                }
             }
         }
         return bcsub($activeBuy, $activeSell, 2);
+    }
+
+    public function calculate($num_first, $num_second)
+    {
+        $result = (($num_second/$num_first)-1)*100;
+        return $result;
     }
 }

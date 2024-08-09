@@ -23,7 +23,9 @@ class DashboardController extends Controller
     public function check(Request $request, DealService $dealService)
     {
         $deals = $dealService->getDeals($request->user());
-        return view('dashboard.check', compact('deals'));
+        $profit = $dealService->calculateProfit($deals);
+        $activeCount = $dealService->calculateActive($deals);
+        return view('dashboard.check', compact('deals','profit', 'activeCount'));
     }
 
     public function capital(CapitalChangeRequest $request, DealService $dealService)
@@ -32,26 +34,16 @@ class DashboardController extends Controller
         return back();
     }
 
-    public function calculate(Request $request, DealService $dealService)
+    public function updateMoneyCapitalUser(Request $request)
     {
-        $value = $request->only('calculate');
-        $deals = $request->user()->deals()->get();
-        $profit = null;
-        $activeCount = null;
-        switch ($value['calculate']) {
-            case 'profit':
-                $profit = $dealService->calculateProfit($deals);
-                break;
-            case 'active':
-                $activeCount = $dealService->calculateActive($deals);
-                break;
-        }
-        return view('dashboard.check',  compact('deals', 'profit', 'activeCount'));
+        $capital = $request->user()->money_capital->value();
+        $update_capital = $request->user()->update(['money_capital' => $request->only('update_capital')]);
+        return view('dashboard.capital.update', compact('update_capital', 'capital'));
     }
 
-    public function getUsers(Request $request): \Illuminate\Database\Eloquent\Collection
+    public function calculate(Request $request, DealService $dealService)
     {
-
-        return User::all();
+        $result = $dealService->calculate($request->first_num, $request->second_num);
+        return view('dashboard.index', compact('result'));
     }
 }

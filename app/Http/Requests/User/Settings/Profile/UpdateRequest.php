@@ -19,7 +19,6 @@ class UpdateRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:50'],
             'last_name' => ['required', 'string', 'max:50'],
-            'crypto_exchange' => ['required', 'string', Rule::enum(CryptoExchangeEnum::class)],
         ];
     }
 }
