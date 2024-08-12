@@ -94,6 +94,21 @@ class DealService
         return bcsub($activeBuy, $activeSell, 2);
     }
 
+    public function activeCapitel($deals, $user, $profit)
+    {
+
+        foreach($deals as $deal) {
+            if ($deal->action == ActionsActiveEnum::buy) {
+                $activeBuy = bcadd($user->money_capital->value(), $deal->sum->value(), 2);
+            } elseif ($deal->action == ActionsActiveEnum::sell) {
+                $activeSell = bcadd($user->money_capital->value(), $deal->sum->value(), 2);
+            }
+        }
+        $result = bcsub($activeBuy , $activeSell, 2);
+
+       return bcadd($result , $profit, 2);
+    }
+
     public function calculate($num_first, $num_second)
     {
         $result = (($num_second/$num_first)-1)*100;

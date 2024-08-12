@@ -25,7 +25,8 @@ class DashboardController extends Controller
         $deals = $dealService->getDeals($request->user());
         $profit = $dealService->calculateProfit($deals);
         $activeCount = $dealService->calculateActive($deals);
-        return view('dashboard.check', compact('deals','profit', 'activeCount'));
+        $activeCapital = $dealService->activeCapitel($deals, $request->user(), $profit);
+        return view('dashboard.check', compact('deals','profit', 'activeCount', 'activeCapital'));
     }
 
     public function capital(CapitalChangeRequest $request, DealService $dealService)
@@ -36,9 +37,13 @@ class DashboardController extends Controller
 
     public function updateMoneyCapitalUser(Request $request)
     {
-        $capital = $request->user()->money_capital->value();
-        $update_capital = $request->user()->update(['money_capital' => $request->only('update_capital')]);
-        return view('dashboard.capital.update', compact('update_capital', 'capital'));
+        $request->validate([
+            'capital' => 'required|numeric|min:0',
+        ]);
+        // Обновляем капитал пользователя
+        $request->user()->update(['money_capital' => $request->input('capital')]);
+        // Возвращаемся на ту же страницу с сообщением об успешном обновлении
+        return redirect()->back()->with('success', 'Капитал успешно обновлен');
     }
 
     public function calculate(Request $request, DealService $dealService)

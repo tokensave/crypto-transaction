@@ -3,7 +3,7 @@
         {{ $name }}
     </dt>
 
-    <dd class="mt-1 flex text-sm leading-6 text-white sm:col-span-2 sm:mt-0">
+    <dd class="mt-1 flex text-sm leading-6 text-white2 sm:col-span-2 sm:mt-0">
         <div class="flex-grow">
             {{ $value }}
         </div>

@@ -51,23 +51,41 @@
 
     <div class="flex items-up justify-center min-h-screen bg-gray-900">
         <div class="col-span-12">
-
             <x-table>
-
                 <x-table.trow>
-
                     <x-table.thead>Ваш капитал</x-table.thead>
                     <x-table.thead>Прибыль</x-table.thead>
-                    <x-table.thead>Остаток активов</x-table.thead>
-
+                    <x-table.thead>Остаток активов USDT</x-table.thead>
+                    <x-table.thead>Остаток активов RUB</x-table.thead>
                 </x-table.trow>
 
                 <x-table.trow>
-                        <x-table.trow>
-                            <x-table.tbody>{{ Auth::user()->money_capital?->value() }}</x-table.tbody>
-                            <x-table.tbody>{{ $profit? : null }}</x-table.tbody>
-                            <x-table.tbody>{{ $activeCount? : null }}</x-table.tbody>
-                        </x-table.trow>
+                    <x-table.trow>
+                        <!-- Редактируемое поле -->
+                        <x-table.tbody>
+                            <div x-data="{ isEditing: false, value: {{ Auth::user()->money_capital->value() ?? 0 }} }">
+                                <!-- Режим отображения -->
+                                <template x-if="!isEditing">
+                                    <div class="flex items-center space-x-2">
+                                        <span x-text="value" class="cursor-pointer p-2 rounded"></span>
+                                        <button @click="isEditing = true" class="text-black">✏️</button>
+                                    </div>
+                                </template>
+
+                                <!-- Режим редактирования -->
+                                <template x-if="isEditing">
+                                    <form action="{{ route('dashboard.capital.update') }}" method="POST">
+                                        @csrf
+                                        <input type="number" name="capital" value="{{ Auth::user()->money_capital->value() ?? 0 }}" class="p-2 border rounded w-24 text-black">
+                                        <button type="submit">Сохранить</button>
+                                    </form>
+                                </template>
+                            </div>
+                        </x-table.tbody>
+                        <x-table.tbody>{{ $profit ?? null }}</x-table.tbody>
+                        <x-table.tbody>{{ $activeCount ?? null }}</x-table.tbody>
+                        <x-table.tbody>{{ $activeCapital ?? null }}</x-table.tbody>
+                    </x-table.trow>
                 </x-table.trow>
             </x-table>
 
