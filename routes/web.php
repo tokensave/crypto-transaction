@@ -65,3 +65,4 @@ Route::get('/social/{driver}/redirect', [SocialController::class, 'redirect'])->
 Route::get('/social/{driver}/callback', [SocialController::class, 'callback'])->name('social.callback');
 
 
+

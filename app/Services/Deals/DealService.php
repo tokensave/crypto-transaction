@@ -96,7 +96,9 @@ class DealService
 
     public function activeCapitel($deals, $user, $profit)
     {
-
+        $activeBuy = '0';
+        $activeSell = '0';
+        
         foreach($deals as $deal) {
             if ($deal->action == ActionsActiveEnum::buy) {
                 $activeBuy = bcadd($user->money_capital->value(), $deal->sum->value(), 2);
@@ -104,6 +106,7 @@ class DealService
                 $activeSell = bcadd($user->money_capital->value(), $deal->sum->value(), 2);
             }
         }
+
         $result = bcsub($activeBuy , $activeSell, 2);
 
        return bcadd($result , $profit, 2);

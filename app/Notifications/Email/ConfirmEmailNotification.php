@@ -31,9 +31,10 @@ class ConfirmEmailNotification extends Notification implements ShouldQueue
 
         return (new MailMessage)
             ->subject('Потверждение почты')
-            ->greeting('Здравствйте!')
+            ->greeting('Здравствуйте!')
             ->line("Введите код потверждения: {$this->email->code}")
             ->line('Или нажмите на кнопку ниже')
-            ->action('Потверждение', $url);
+            ->action('Потверждение', $url)
+            ->salutation('С уважением TokenSave');
     }
 }

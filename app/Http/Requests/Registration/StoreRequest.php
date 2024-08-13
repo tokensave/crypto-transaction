@@ -13,6 +13,10 @@ class StoreRequest extends FormRequest
         return true;
     }
 
+    public function prepareForValidation()
+    {
+        $this->merge(['money_capital' => "0"]);
+    }
 
     public function rules(): array
     {
@@ -21,6 +25,7 @@ class StoreRequest extends FormRequest
             'email' => ['required', 'string', 'email:filter', 'max:100', 'unique:users'],
             'password' => ['required', 'string', Password::defaults(), 'confirmed'],
             'agreement' => ['accepted'],
+            'money_capital' => ['required', 'string']
         ];
     }
 }
