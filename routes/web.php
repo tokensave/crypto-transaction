@@ -51,6 +51,7 @@ Route::middleware(['auth', 'online'])->group(function () {
 
     Route::middleware('email.confirm')->group(function () {
         Route::view('/dashboard', 'dashboard.index')->name('dashboard.index');
+//        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
         Route::post('/dashboard/store', [DashboardController::class, 'store'])->name('dashboard.store');
         Route::get('/dashboard/check', [DashboardController::class, 'check'])->name('dashboard.check');
         Route::post('/dashboard/calculate', [DashboardController::class, 'calculate'])->name('dashboard.calculate');

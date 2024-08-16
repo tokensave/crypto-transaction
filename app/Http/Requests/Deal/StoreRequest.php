@@ -28,6 +28,8 @@ class StoreRequest extends FormRequest
         }
         $this->merge([
             'user_id' => $this->user()->id,
+            'course' => format_number($this->course),
+            'sum' => format_number($this->sum),
         ]);
     }
 
@@ -37,8 +39,8 @@ class StoreRequest extends FormRequest
             'active' => ['required', 'string', Rule::enum(CryptoActiveEnum::class)],
             'crypto_exchange' => ['required', 'string', Rule::enum(CryptoExchangeEnum::class)],
             'action' => ['required', 'string', Rule::enum(ActionsActiveEnum::class)],
-            'course' => ['required', 'string'],
-            'sum' => ['required', 'string'],
+            'course' => ['required', 'numeric'],
+            'sum' => ['required', 'numeric'],
             'provider' => ['required', 'string', Rule::enum(BanksEnum::class)],
             'deal_id' => ['required', 'string'],
             'user_id' => ['integer']

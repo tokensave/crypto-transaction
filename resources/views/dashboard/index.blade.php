@@ -54,7 +54,7 @@
     <div class="flex justify-center my-8">
         <form action="{{ route('dashboard.capital') }}" method="POST" class="flex items-center justify-center gap-x-4 bg-gray-900">
             @csrf
-            <input type="number" name="money_capital" placeholder="Ваш обьем капитала" class="rounded-lg px-3 py-1 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-indigo-300">
+            <input type="text" name="money_capital" placeholder="Ваш обьем капитала" class="rounded-lg px-3 py-1 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-indigo-300">
             <button type="submit" class="px-4 py-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">Добавить количество денежных средств</button>
         </form>
     </div>
@@ -66,8 +66,8 @@
         </div>
         <form action="{{ route('dashboard.calculate') }}" method="POST" class="flex items-center justify-center gap-x-4 bg-gray-900">
             @csrf
-            <input type="number" name="first_num" placeholder="Первое число" class="rounded-lg px-3 py-1 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-indigo-300">
-            <input type="number" name="second_num" placeholder="Второе число" class="rounded-lg px-3 py-1 ml-2 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-indigo-300">
+            <input type="text" name="first_num" placeholder="Первое число" class="rounded-lg px-3 py-1 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-indigo-300">
+            <input type="text" name="second_num" placeholder="Второе число" class="rounded-lg px-3 py-1 ml-2 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-indigo-300">
             <button type="submit" class="px-10 py-2 ml-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">Посчитать</button>
         </form>
     </div>
@@ -141,7 +141,6 @@
         </form>
 
     </div>
-
 
 
 </x-layouts.base>

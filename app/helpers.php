@@ -17,3 +17,8 @@ function code(): string
 {
     return (string) rand(100000, 999999);
 }
+
+function format_number(string $number)
+{
+    return str_replace(',', '.', $number);
+}

@@ -98,7 +98,7 @@ class DealService
     {
         $activeBuy = '0';
         $activeSell = '0';
-        
+
         foreach($deals as $deal) {
             if ($deal->action == ActionsActiveEnum::buy) {
                 $activeBuy = bcadd($user->money_capital->value(), $deal->sum->value(), 2);
@@ -112,9 +112,9 @@ class DealService
        return bcadd($result , $profit, 2);
     }
 
-    public function calculate($num_first, $num_second)
+    public function calculate($data)
     {
-        $result = (($num_second/$num_first)-1)*100;
+        $result = (($data['second_num']/$data['first_num'])-1)*100;
         return $result;
     }
 }

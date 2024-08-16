@@ -4,7 +4,7 @@
     </dt>
 
     <dd class="mt-1 flex text-sm leading-6 text-white2 sm:col-span-2 sm:mt-0">
-        <div class="flex-grow">
+        <div class="flex-grow text-white">
             {{ $value }}
         </div>
 
