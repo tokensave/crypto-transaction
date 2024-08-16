@@ -61,13 +61,13 @@
 
 
     <div class="flex justify-center my-8">
-        <div class="text-white text-center bg-gray-900 p-2">
+        <div class="text-white text-center bg-gray-900 p-2 mr-10">
             <p>Калькулятор спреда</p>
         </div>
         <form action="{{ route('dashboard.calculate') }}" method="POST" class="flex items-center justify-center gap-x-4 bg-gray-900">
             @csrf
-            <input type="text" name="first_num" placeholder="Первое число" class="rounded-lg px-3 py-1 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-indigo-300">
-            <input type="text" name="second_num" placeholder="Второе число" class="rounded-lg px-3 py-1 ml-2 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-indigo-300">
+            <x-table.text type="text" name="first_num" placeholder="Первое число"/>
+            <x-table.text type="text" name="second_num" placeholder="Второе число"/>
             <button type="submit" class="px-10 py-2 ml-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">Посчитать</button>
         </form>
     </div>
@@ -75,7 +75,7 @@
     <div class="flex justify-center my-8">
         @isset($result)
             <div class="text-white text-center bg-gray-900 p-2">
-                <p>Результат : {{ $result? : null }} %</p>
+                <p>Результат : {{ number_format($result, 2)? : null }} %</p>
             </div>
         @endisset
     </div>
