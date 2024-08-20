@@ -1,3 +1,3 @@
-<th class="p-3 font-bold rounded-t-lg">
+<th {{ $attributes }} class="p-3 text-center font-bold rounded-t-lg">
     {{ $slot }}
 </th>

@@ -1,4 +1,4 @@
-<td class="p-3 text-center font-bold divide-y divide-gray-800">
+<td {{ $attributes }} class="p-3 text-center">
     {{ $slot }}
 </td>
 
