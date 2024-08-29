@@ -20,16 +20,10 @@ class StoreRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        if ($this->crypto_exchange == CryptoExchangeEnum::garantex->value)
-        {
-            $this->merge([
-                'course' => '1',
-            ]);
-        }
         $this->merge([
-            'user_id' => $this->user()->id,
-            'course' => format_number($this->course),
-            'sum' => format_number($this->sum),
+            'course' => format_number($this->input('course')),
+            'sum' => format_number($this->input('sum')),
+            'active_count' => $this->calculateActiveCount(),
         ]);
     }
 
@@ -43,7 +37,18 @@ class StoreRequest extends FormRequest
             'sum' => ['required', 'numeric'],
             'provider' => ['required', 'string', Rule::enum(BanksEnum::class)],
             'deal_id' => ['required', 'string'],
-            'user_id' => ['integer']
+            'active_count' => ['required', 'string']
         ];
+    }
+
+    private function calculateActiveCount(): string
+    {
+        return total_amount(
+            $this->input('active'),
+            $this->input('crypto_exchange'),
+            $this->input('action'),
+            format_number($this->input('sum')),
+            format_number($this->input('course'))
+        );
     }
 }

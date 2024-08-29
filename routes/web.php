@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\User\Settings\PasswordController as UserPasswordController;
 use App\Http\Controllers\User\Settings\ProfileController;
@@ -57,6 +58,10 @@ Route::middleware(['auth', 'online'])->group(function () {
         Route::post('/dashboard/calculate', [DashboardController::class, 'calculate'])->name('dashboard.calculate');
         Route::post('/dashboard/capital', [DashboardController::class, 'capital'])->name('dashboard.capital');
         Route::post('/dashboard/check/capital/change', [DashboardController::class, 'updateMoneyCapitalUser'])->name('dashboard.capital.update');
+
+        Route::view('/report', 'report.index')->name('report.index');
+        Route::get('/report/info', [ReportController::class, 'info'])->name('report.info');
+
     });
 });
 

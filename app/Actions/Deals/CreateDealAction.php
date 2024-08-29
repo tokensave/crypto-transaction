@@ -14,8 +14,10 @@ class CreateDealAction
             'course' => $data->course->value(),
             'sum' => $data->sum->value(),
             'provider' => $data->provider,
+            'active_count' => $data->active_count,
             'deal_id' => $data->dealId,
             'user_id' => $data->userId,
+            'report_id' => $data->reportId
         ]);
     }
 }

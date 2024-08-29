@@ -13,7 +13,9 @@ class CreateDealData
       public readonly AmountValue $course,
       public readonly AmountValue $sum,
       public readonly string $provider,
+      public readonly string $active_count,
       public readonly string $dealId,
       public readonly int $userId,
+      public readonly int $reportId,
     ){}
 }

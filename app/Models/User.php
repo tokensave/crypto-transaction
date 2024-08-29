@@ -4,8 +4,11 @@ namespace App\Models;
 
 
 use App\Enums\CryptoExchangeEnum;
+use App\Models\Deals\Report;
 use App\Support\Values\AmountValue;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -56,9 +59,14 @@ class User extends Authenticatable
         ]);
     }
 
-    public function deals()
+    public function deals(): HasMany
     {
         return $this->hasMany(Deal::class);
+    }
+
+    public function report(): HasOne
+    {
+        return $this->hasOne(Report::class);
     }
 
     public function isEmailConfirm(): bool

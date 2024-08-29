@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('middle_name')->nullable()->comment('Отчество');
             $table->string('last_name')->nullable()->comment('Фамилия');
 
-            $table->string('crypto_exchange', 10)->nullable()->comment('Крипто Биржа');
             $table->decimal('money_capital', 12, 2)->nullable()->comment('Денежный капитал');
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_confirmed_at')->nullable();

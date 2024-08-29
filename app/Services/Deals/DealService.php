@@ -7,8 +7,10 @@ use App\Actions\Deals\CreateDealData;
 use App\Enums\ActionsActiveEnum;
 use App\Enums\CryptoExchangeEnum;
 use App\Models\Deal;
+use App\Models\Deals\Report;
 use App\Models\User;
 use App\Support\Values\AmountValue;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -17,9 +19,18 @@ class DealService
     /**
      * @throws Throwable
      */
-    public function createDeal(array $data): Deal
+    public function createDeal(array $data, User $user): Deal
     {
-        return DB::transaction(function () use ($data) {
+        return DB::transaction(function () use ($data, $user) {
+            $today = now()->toDateString();
+            $report = Report::query()->firstOrCreate(
+                ['user_id' => $user->id, 'date' => $today],
+                [
+                    'remainder_capital' => 0, // Начальное значение, если нужно
+                    'profit' => 0,            // Начальное значение, если нужно
+                ]
+            );
+
             return app(CreateDealAction::class)->run(new CreateDealData(
                 $data['active'],
                 $data['crypto_exchange'],
@@ -27,8 +38,10 @@ class DealService
                 new AmountValue($data['course']),
                 new AmountValue($data['sum']),
                 $data['provider'],
+                $data['active_count'],
                 $data['deal_id'],
-                $data['user_id'],
+                $user->id,
+                $report->id
             ));
         });
     }
@@ -50,71 +63,11 @@ class DealService
         }
     }
 
-    public function calculateProfit($deals)
-    {
-        $profit = '0';
-        foreach ($deals as $deal) {
-            if ($deal->action == ActionsActiveEnum::buy) {
-                $profit = bcsub($profit, $deal->sum->value(), 2);
-            } elseif ($deal->action == ActionsActiveEnum::sell) {
-                $profit = bcadd($profit, $deal->sum->value(), 2);
-            }
-        }
-//        // Рассчитываем прибыль
-//        $value = new AmountValue('0');
-//        foreach ($deals as $deal) {
-//            if ($deal->action == ActionsActiveEnum::buy) {
-//                $value = $value->sub($deal->sum->value(), 2);
-//            } elseif ($deal->action == ActionsActiveEnum::sell) {
-//                $value = $value->add($deal->sum->value(), 2);
-//            }
-//        }
-        return $profit;
-    }
-
-    public function calculateActive($deals)
-    {
-        $activeBuy = '0';
-        $activeSell = '0';
-        foreach ($deals as $deal) {
-            if ($deal->crypto_exchange !== CryptoExchangeEnum::garantex) {
-                if ($deal->action == ActionsActiveEnum::buy) {
-                    $activeBuy = bcadd($activeBuy, $deal->totalAmount(), 2);
-                } elseif ($deal->action == ActionsActiveEnum::sell) {
-                    $activeSell = bcadd($activeSell, $deal->totalAmount(), 2);
-                }
-            } else {
-                if ($deal->action == ActionsActiveEnum::buy) {
-                    $activeBuy = bcadd($activeBuy, 1, 2);
-                } elseif ($deal->action == ActionsActiveEnum::sell) {
-                    $activeSell = bcadd($activeSell, 1, 2);
-                }
-            }
-        }
-        return bcsub($activeBuy, $activeSell, 2);
-    }
-
-    public function activeCapitel($deals, $user, $profit)
-    {
-        $activeBuy = '0';
-        $activeSell = '0';
-
-        foreach($deals as $deal) {
-            if ($deal->action == ActionsActiveEnum::buy) {
-                $activeBuy = bcadd($user->money_capital->value(), $deal->sum->value(), 2);
-            } elseif ($deal->action == ActionsActiveEnum::sell) {
-                $activeSell = bcadd($user->money_capital->value(), $deal->sum->value(), 2);
-            }
-        }
-
-        $result = bcsub($activeBuy , $activeSell, 2);
-
-       return bcadd($result , $profit, 2);
-    }
-
     public function calculate($data)
     {
         $result = (($data['second_num']/$data['first_num'])-1)*100;
+
         return $result;
     }
+
 }

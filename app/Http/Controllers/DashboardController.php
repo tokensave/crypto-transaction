@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Deal\CalculateRequest;
 use App\Http\Requests\Deal\CapitalChangeRequest;
 use App\Http\Requests\Deal\StoreRequest;
+use App\Models\Deals\Report;
 use App\Services\Deals\DealService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -42,17 +43,14 @@ class DashboardController extends Controller
      */
     public function store(StoreRequest $request, DealService $dealService)
     {
-        $dealService->createDeal($request->validated());
+        $dealService->createDeal($request->validated(), $request->user());
         return redirect()->route('dashboard.check');
     }
 
     public function check(Request $request, DealService $dealService)
     {
         $deals = $dealService->getDeals($request->user());
-        $profit = $dealService->calculateProfit($deals);
-        $activeCount = $dealService->calculateActive($deals);
-        $activeCapital = $dealService->activeCapitel($deals, $request->user(), $profit);
-        return view('dashboard.check', compact('deals','profit', 'activeCount', 'activeCapital'));
+        return view('dashboard.check', compact('deals'));
     }
 
     public function capital(CapitalChangeRequest $request, DealService $dealService)
