@@ -62,6 +62,7 @@
                     <x-table.thead>Курс</x-table.thead>
                     <x-table.thead>Сумма</x-table.thead>
                     <x-table.thead>Банк</x-table.thead>
+                    <x-table.thead>Комиссия биржи</x-table.thead>
                     <x-table.thead>Идентификатор сделки</x-table.thead>
                     <x-table.thead>Добавить</x-table.thead>
                 </tr>
@@ -85,6 +86,9 @@
                     </x-table.tbody>
                     <x-table.tbody>
                         <x-table.select name="provider" :options="App\Enums\BanksEnum::select()" class="bg-transparent" placeholder="Выбрать"/>
+                    </x-table.tbody>
+                    <x-table.tbody>
+                        <x-table.text type="text" name="cost" placeholder="Введите комиссию"/>
                     </x-table.tbody>
                     <x-table.tbody>
                         <x-table.text type="text" name="deal_id" placeholder="Введите id сделки"/>

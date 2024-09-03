@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Deal\CalculateRequest;
-use App\Http\Requests\Deal\CapitalChangeRequest;
 use App\Http\Requests\Deal\StoreRequest;
-use App\Models\Deals\Report;
+use App\Http\Requests\User\Settings\MoneyCapital\CapitalChangeRequest;
 use App\Services\Deals\DealService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -57,17 +56,6 @@ class DashboardController extends Controller
     {
         $dealService->changeUserCapital($request->validated(), $request->user());
         return back();
-    }
-
-    public function updateMoneyCapitalUser(Request $request)
-    {
-        $request->validate([
-            'capital' => 'required|numeric|min:0',
-        ]);
-        // Обновляем капитал пользователя
-        $request->user()->update(['money_capital' => $request->input('capital')]);
-        // Возвращаемся на ту же страницу с сообщением об успешном обновлении
-        return redirect()->back()->with('success', 'Капитал успешно обновлен');
     }
 
     public function calculate(CalculateRequest $request, DealService $dealService)

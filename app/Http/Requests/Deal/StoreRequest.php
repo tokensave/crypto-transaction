@@ -48,7 +48,8 @@ class StoreRequest extends FormRequest
             $this->input('crypto_exchange'),
             $this->input('action'),
             format_number($this->input('sum')),
-            format_number($this->input('course'))
+            format_number($this->input('course')),
+            $this->input('cost') ? format_number($this->input('cost')) : null
         );
     }
 }

@@ -27,9 +27,16 @@ function format_number(string $number): array|string
     return str_replace(',', '.', $number);
 }
 
-function total_amount(string $active, string $exchange, string $action, string $sum, string $course): string
+function total_amount(string $active, string $exchange, string $action, string $sum, string $course, ?string $commission = null): string
 {
+    $cost = false;
+
     $result = bcdiv(bcmul($sum, $course, 2), 100, 2);
+
+    if ($commission !== null) {
+        $result = bcsub($result, bcmul($result, bcdiv($commission, '100', 4), 2), 2);
+        $cost = true;
+    }
 
     if ($exchange === CryptoExchangeEnum::garantex->value && $active === CryptoActiveEnum::rub->value) {
         return $action === ActionsActiveEnum::buy->value
@@ -37,5 +44,7 @@ function total_amount(string $active, string $exchange, string $action, string $
             : bcsub($sum, $result, 2);
     }
 
-    return bcdiv($sum, $course, 2);
+    return $cost
+        ? bcdiv($result, $course, 2)
+        : bcdiv($sum, $course, 2);
 }

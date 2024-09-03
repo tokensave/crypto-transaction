@@ -3,28 +3,26 @@
 namespace App\Http\Controllers\User\Settings;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\Settings\Profile\UpdateRequest;
+use App\Http\Requests\User\Settings\MoneyCapital\CapitalChangeRequest;
 use Illuminate\Http\Request;
 
-class ProfileController extends Controller
+class MoneyCapitalController extends Controller
 {
     public function edit(Request $request)
     {
         $user = $request->user();
 
-        return view('user.settings.profile.edit', [
+        return view('user.settings.capital.edit', [
             'user' => $user
         ]);
     }
 
-    public function update(UpdateRequest $request)
+    public function update(CapitalChangeRequest $request)
     {
         $user = $request->user();
 
         $data = $request->only([
-            'first_name',
-            'last_name',
-            'middle_name',
+            'money_capital',
         ]);
 
         $user->update($data);

@@ -8,6 +8,7 @@ use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\User\Settings\MoneyCapitalController;
 use App\Http\Controllers\User\Settings\PasswordController as UserPasswordController;
 use App\Http\Controllers\User\Settings\ProfileController;
 use App\Http\Controllers\User\SettingsController;
@@ -49,6 +50,8 @@ Route::middleware(['auth', 'online'])->group(function () {
     Route::post('/user/settings/profile', [ProfileController::class, 'update'])->name('user.settings.profile.update');
     Route::get('/user/settings/password', [UserPasswordController::class, 'edit'])->name('user.settings.password.edit');
     Route::post('/user/settings/password', [UserPasswordController::class, 'update'])->name('user.settings.password.update');
+    Route::get('/user/settings/capital', [MoneyCapitalController::class, 'edit'])->name('user.settings.capital.edit');
+    Route::post('/user/settings/capital', [MoneyCapitalController::class, 'update'])->name('user.settings.capital.update');
 
     Route::middleware('email.confirm')->group(function () {
         Route::view('/dashboard', 'dashboard.index')->name('dashboard.index');

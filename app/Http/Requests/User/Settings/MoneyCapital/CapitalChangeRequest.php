@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Deal;
+namespace App\Http\Requests\User\Settings\MoneyCapital;
 
 use Illuminate\Foundation\Http\FormRequest;
 

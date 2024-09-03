@@ -51,18 +51,6 @@ class DealService
         return $user->deals()->get();
     }
 
-    public function changeUserCapital(array $data, User $user): void
-    {
-        $new_capital = new AmountValue($data['money_capital']);
-
-        if (!$user->money_capital) {
-            $user->update(['money_capital' => $new_capital]);
-        } else {
-            $result = $new_capital->add($user->money_capital->value());
-            $user->update(['money_capital' => $result]);
-        }
-    }
-
     public function calculate($data)
     {
         $result = (($data['second_num']/$data['first_num'])-1)*100;
