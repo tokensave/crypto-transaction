@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Deal\CalculateRequest;
 use App\Http\Requests\Deal\StoreRequest;
 use App\Http\Requests\User\Settings\MoneyCapital\CapitalChangeRequest;
+use App\Models\Deal;
 use App\Services\Deals\DealService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Throwable;
@@ -62,5 +64,14 @@ class DashboardController extends Controller
     {
         $result = $dealService->calculate($request->validated());
         return view('dashboard.index', compact('result'));
+    }
+
+    public function downloadDeals()
+    {
+        $deals = Deal::all();
+
+        $pdf = PDF::loadView('deals.index', compact('deals'));
+
+        return $pdf->download('deals.pdf');
     }
 }

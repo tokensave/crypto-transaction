@@ -61,6 +61,7 @@ Route::middleware(['auth', 'online'])->group(function () {
         Route::post('/dashboard/calculate', [DashboardController::class, 'calculate'])->name('dashboard.calculate');
         Route::post('/dashboard/capital', [DashboardController::class, 'capital'])->name('dashboard.capital');
         Route::post('/dashboard/check/capital/change', [DashboardController::class, 'updateMoneyCapitalUser'])->name('dashboard.capital.update');
+        Route::get('/dashboard/check/pdf', [DashboardController::class, 'downloadDeals'])->name('dashboard.deals.download');
 
         Route::view('/report', 'report.index')->name('report.index');
         Route::get('/report/info', [ReportController::class, 'info'])->name('report.info');

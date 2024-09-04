@@ -56,8 +56,16 @@
                     @endforeach
                 </x-table.trow>
             </x-table>
+
+            <div class="mt-10 text-right">
+                <a href="{{ route('dashboard.deals.download') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Скачать сделки
+                </a>
+            </div>
         </div>
     </div>
+
+
 
 
 </x-layouts.base>
