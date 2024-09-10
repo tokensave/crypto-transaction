@@ -36,6 +36,7 @@
                     <x-table.thead>Биржа</x-table.thead>
                     <x-table.thead>Идентификатор сделки</x-table.thead>
                     <x-table.thead>Количество актива</x-table.thead>
+                    <x-table.thead>Комиссия биржи</x-table.thead>
                     <x-table.thead>Дата</x-table.thead>
                     <x-table.thead>Редактировать</x-table.thead>
                     <x-table.thead>Удалить</x-table.thead>
@@ -54,6 +55,7 @@
                             <x-table.tbody>{{ $deal->crypto_exchange->name() }}</x-table.tbody>
                             <x-table.tbody>{{ $deal->deal_id }}</x-table.tbody>
                             <x-table.tbody>{{ $deal->active_count }}</x-table.tbody>
+                            <x-table.tbody>{{ $deal->cost }}</x-table.tbody>
                             <x-table.tbody>{{ $deal->created_at }}</x-table.tbody>
                             <x-table.tbody>
                                 <a href="{{ route('dashboard.deals.edit', ['id' => $deal->id]) }}" class="flex justify-center items-center">

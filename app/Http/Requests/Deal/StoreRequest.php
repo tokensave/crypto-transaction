@@ -23,6 +23,7 @@ class StoreRequest extends FormRequest
         $this->merge([
             'course' => format_number($this->input('course')),
             'sum' => format_number($this->input('sum')),
+            'cost' => format_number($this->input('cost')) ?? null,
             'active_count' => $this->calculateActiveCount(),
         ]);
     }
@@ -36,6 +37,7 @@ class StoreRequest extends FormRequest
             'course' => ['required', 'numeric'],
             'sum' => ['required', 'numeric'],
             'provider' => ['required', 'string', Rule::enum(BanksEnum::class)],
+            'cost' => ['nullable', 'string'],
             'deal_id' => ['required', 'string'],
             'active_count' => ['required', 'string']
         ];

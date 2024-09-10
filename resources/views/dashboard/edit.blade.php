@@ -32,7 +32,7 @@
             </div>
 
             <div class="mb-4">
-                <x-table.text type="text" name="cost" placeholder="Введите комиссию"/>
+                <x-table.text type="text" name="cost" value="{{ old('cost', $deal->cost) }}"/>
             </div>
 
             <div class="mb-4">

@@ -35,6 +35,7 @@ class UpdateRequest extends FormRequest
             'course' => ['required', 'numeric'],
             'sum' => ['required', 'numeric'],
             'provider' => ['required', 'string', Rule::enum(BanksEnum::class)],
+            'cost' => ['nullable', 'string'],
             'deal_id' => ['required', 'string'],
             'active_count' => ['required', 'string']
         ];

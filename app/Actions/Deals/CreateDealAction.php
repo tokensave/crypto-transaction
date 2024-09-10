@@ -15,6 +15,7 @@ class CreateDealAction
             'sum' => $data->sum->value(),
             'provider' => $data->provider,
             'active_count' => $data->active_count,
+            'cost' => $data->cost,
             'deal_id' => $data->dealId,
             'user_id' => $data->userId,
             'report_id' => $data->reportId
