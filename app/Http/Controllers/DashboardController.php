@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Deal\CalculateRequest;
 use App\Http\Requests\Deal\StoreRequest;
+use App\Http\Requests\Deal\UpdateRequest;
 use App\Http\Requests\User\Settings\MoneyCapital\CapitalChangeRequest;
 use App\Models\Deal;
 use App\Services\Deals\DealService;
@@ -73,5 +74,35 @@ class DashboardController extends Controller
         $pdf = PDF::loadView('deals.index', compact('deals'));
 
         return $pdf->download('deals.pdf');
+    }
+
+    public function editDeal(string $id)
+    {
+        $deal = Deal::findOrFail($id);
+        return view('dashboard.edit', compact('deal'));
+    }
+
+    public function updateDeal(UpdateRequest $request, string $id, DealService $dealService)
+    {
+        $dealService->updateDeal($request->validated(), $id);
+
+        // Редирект на список сделок с уведомлением об успехе
+        return redirect()->route('dashboard.check')
+            ->with('success', 'Сделка успешно обновлена');
+    }
+
+    public function deleteDeal(string $id)
+    {
+        $deal = Deal::findOrFail($id);
+
+        if ($deal->delete()) {
+            // Если удаление успешно, редиректим на список сделок с уведомлением
+            return redirect()->route('dashboard.check')
+                ->with('success', 'Сделка успешно удалена');
+        }
+
+        // Если что-то пошло не так, возвращаем ошибку
+        return redirect()->route('dashboard.check')
+            ->with('error', 'Не удалось удалить сделку');
     }
 }

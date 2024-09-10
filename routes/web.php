@@ -58,6 +58,10 @@ Route::middleware(['auth', 'online'])->group(function () {
 //        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
         Route::post('/dashboard/store', [DashboardController::class, 'store'])->name('dashboard.store');
         Route::get('/dashboard/check', [DashboardController::class, 'check'])->name('dashboard.check');
+        Route::get('/dashboard/check/{id}/edit', [DashboardController::class, 'editDeal'])->name('dashboard.deals.edit');
+        Route::put('/dashboard/check/{id}', [DashboardController::class, 'updateDeal'])->name('dashboard.deals.update');
+        Route::delete('/dashboard/check/{id}', [DashboardController::class, 'deleteDeal'])->name('dashboard.deals.delete');
+
         Route::post('/dashboard/calculate', [DashboardController::class, 'calculate'])->name('dashboard.calculate');
         Route::post('/dashboard/capital', [DashboardController::class, 'capital'])->name('dashboard.capital');
         Route::post('/dashboard/check/capital/change', [DashboardController::class, 'updateMoneyCapitalUser'])->name('dashboard.capital.update');

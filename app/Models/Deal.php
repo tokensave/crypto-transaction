@@ -24,6 +24,7 @@ class Deal extends Model
         'sum',
         'provider',
         'active_count',
+        'cost',
         'deal_id',
         'report_id',
         'user_id',

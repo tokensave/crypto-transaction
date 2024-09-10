@@ -24,6 +24,7 @@ return new class extends Migration
             $table->decimal('course',12,2)->nullable('false')->comment('Курс');
             $table->decimal('sum',12,2)->nullable('false')->comment('Сумма');
             $table->string('active_count')->nullable('false')->comment('Подсчет активов');
+            $table->string('cost')->nullable('true')->comment('Комиссия биржи');
             $table->string('provider')->nullable('false')->comment('Банк');
             $table->string('deal_id')->nullable('false')->comment('Идентификатор сделки');
         });

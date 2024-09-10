@@ -6,11 +6,10 @@ use App\Enums\ActionsActiveEnum;
 use App\Enums\BanksEnum;
 use App\Enums\CryptoActiveEnum;
 use App\Enums\CryptoExchangeEnum;
-use App\Support\Values\AmountValue;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
 
     public function authorize(): bool
@@ -23,7 +22,6 @@ class StoreRequest extends FormRequest
         $this->merge([
             'course' => format_number($this->input('course')),
             'sum' => format_number($this->input('sum')),
-            'cost' => format_number($this->input('cost')) ?? null,
             'active_count' => $this->calculateActiveCount(),
         ]);
     }

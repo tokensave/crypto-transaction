@@ -4,6 +4,8 @@ namespace App\Services\Deals;
 
 use App\Actions\Deals\CreateDealAction;
 use App\Actions\Deals\CreateDealData;
+use App\Actions\Deals\UpdateDealAction;
+use App\Actions\Deals\UpdateDealData;
 use App\Enums\ActionsActiveEnum;
 use App\Enums\CryptoExchangeEnum;
 use App\Models\Deal;
@@ -39,12 +41,33 @@ class DealService
                 new AmountValue($data['sum']),
                 $data['provider'],
                 $data['active_count'],
+                $data['cost'],
                 $data['deal_id'],
                 $user->id,
                 $report->id
             ));
         });
     }
+
+    public function updateDeal(array $data, string $id): bool
+    {
+        return DB::transaction(function () use ($data, $id) {
+
+            return app(UpdateDealAction::class)->run(new UpdateDealData(
+                $id,
+                $data['active'],
+                $data['crypto_exchange'],
+                $data['action'],
+                new AmountValue($data['course']),
+                new AmountValue($data['sum']),
+                $data['provider'],
+                $data['cost'] ?? null,
+                $data['deal_id'],
+                $data['active_count'],
+            ));
+        });
+    }
+
 
     public function getDeals(User $user)
     {
