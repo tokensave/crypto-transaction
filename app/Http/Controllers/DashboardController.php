@@ -85,10 +85,6 @@ class DashboardController extends Controller
     public function updateDeal(UpdateRequest $request, string $id, DealService $dealService)
     {
         $dealService->updateDeal($request->validated(), $id);
-//        $deal = Deal::findOrFail($id);
-//
-//        // Примените валидацию и обновление данных
-//        $deal->update($request->validated());
 
         // Редирект на список сделок с уведомлением об успехе
         return redirect()->route('dashboard.check')
