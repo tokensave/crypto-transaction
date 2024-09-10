@@ -40,9 +40,18 @@
                     </div>
                 </x-form.item>
 
+                <div class="form-group mt-6 mb-6 flex justify-center">
+                    {!! NoCaptcha::display() !!}
+                </div>
+
                 <x-button type="submit">Войти</x-button>
 
+
+
             </x-form>
+
+            {!! NoCaptcha::renderJs() !!}
+
         </x-card.body>
     </x-card>
 

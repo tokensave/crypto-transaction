@@ -25,7 +25,8 @@ class StoreRequest extends FormRequest
             'email' => ['required', 'string', 'email:filter', 'max:100', 'unique:users'],
             'password' => ['required', 'string', Password::defaults(), 'confirmed'],
             'agreement' => ['accepted'],
-            'money_capital' => ['required', 'string']
+            'money_capital' => ['required', 'string'],
+            'g-recaptcha-response' => ['required', 'captcha'],
         ];
     }
 }

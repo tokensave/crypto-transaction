@@ -34,7 +34,13 @@
 
                 <x-button type="submit">Зарегистрироваться</x-button>
 
+                <div class="form-group mt-6 flex justify-center">
+                    {!! NoCaptcha::display() !!}
+                </div>
+
             </x-form>
+
+            {!! NoCaptcha::renderJs() !!}
 
             @include('includes.social')
 
