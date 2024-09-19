@@ -57,7 +57,7 @@ class DashboardController extends Controller
 
     public function capital(CapitalChangeRequest $request, DealService $dealService)
     {
-        $dealService->changeUserCapital($request->validated(), $request->user());
+        $dealService->addUserCapital($request->validated(), $request->user());
         return back();
     }
 

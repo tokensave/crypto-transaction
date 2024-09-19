@@ -22,33 +22,14 @@
         </x-menu.block>
     </x-menu>
 
-    <div class="flex flex-col items-center my-8 px-4">
-        <form action="{{ route('dashboard.capital') }}" method="POST" class="flex flex-col lg:flex-row items-center justify-center gap-y-4 lg:gap-x-4 bg-gray-900 p-4 rounded-lg w-full lg:w-auto">
-            @csrf
-            <input type="text" name="money_capital" placeholder="Ваш обьем капитала" class="w-full lg:w-auto rounded-lg px-3 py-2 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-indigo-300">
-            <button type="submit" class="w-full lg:w-auto px-4 py-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">Добавить количество денежных средств</button>
-        </form>
-    </div>
+    {{--        <div class="flex flex-col items-center my-8 px-4">--}}
+{{--        <form action="{{ route('dashboard.capital') }}" method="POST" class="flex flex-col lg:flex-row items-center justify-center gap-y-4 lg:gap-x-4 bg-gray-900 p-4 rounded-lg w-full lg:w-auto">--}}
+{{--            @csrf--}}
+{{--            <input type="text" name="money_capital" placeholder="Ваш обьем капитала" class="w-full lg:w-auto rounded-lg px-3 py-2 bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring focus:ring-indigo-300">--}}
+{{--            <button type="submit" class="w-full lg:w-auto px-4 py-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">Добавить количество денежных средств</button>--}}
+{{--        </form>--}}
+{{--    </div>--}}
 
-    <div class="flex flex-col lg:flex-row justify-center my-8 gap-y-4 lg:gap-x-10 px-4">
-        <div class="text-white text-center bg-gray-900 p-2 w-full lg:w-auto pt-5">
-            <p>Калькулятор спреда</p>
-        </div>
-        <form action="{{ route('dashboard.calculate') }}" method="POST" class="flex flex-col lg:flex-row items-center justify-center gap-y-4 lg:gap-x-4 bg-gray-900 p-4 rounded-lg w-full lg:w-auto">
-            @csrf
-            <x-table.text type="text" name="first_num" placeholder="Первое число"/>
-            <x-table.text type="text" name="second_num" placeholder="Второе число"/>
-            <button type="submit" class="w-full lg:w-auto px-10 py-2 ml-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">Посчитать</button>
-        </form>
-    </div>
-
-    <div class="flex justify-center my-8 px-4">
-        @isset($result)
-            <div class="text-white text-center bg-gray-900 p-2 w-full lg:w-auto">
-                <p>Результат : {{ number_format($result, 2)? : null }} %</p>
-            </div>
-        @endisset
-    </div>
 
     <div class="flex flex-col items-center justify-center bg-gray-900 px-4">
         <form action="{{ route('dashboard.store') }}" method="POST" class="w-full lg:w-auto">
@@ -102,5 +83,25 @@
                 </tbody>
             </x-table>
         </form>
+    </div>
+
+    <div class="flex flex-col lg:flex-row justify-center my-8 gap-y-4 lg:gap-x-10 px-4">
+        <div class="text-white text-center bg-gray-900 p-2 w-full lg:w-auto pt-5">
+            <p>Калькулятор спреда</p>
+        </div>
+        <form action="{{ route('dashboard.calculate') }}" method="POST" class="flex flex-col lg:flex-row items-center justify-center gap-y-4 lg:gap-x-4 bg-gray-900 p-4 rounded-lg w-full lg:w-auto">
+            @csrf
+            <x-table.text type="text" name="first_num" placeholder="Первое число"/>
+            <x-table.text type="text" name="second_num" placeholder="Второе число"/>
+            <button type="submit" class="w-full lg:w-auto px-10 py-2 ml-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">Посчитать</button>
+        </form>
+    </div>
+
+    <div class="flex justify-center my-8 px-4">
+        @isset($result)
+            <div class="text-white text-center bg-gray-900 p-2 w-full lg:w-auto">
+                <p>Результат : {{ number_format($result, 2)? : null }} %</p>
+            </div>
+        @endisset
     </div>
 </x-layouts.base>
