@@ -81,4 +81,10 @@ class DealService
         return $result;
     }
 
+    public function addUserCapital($data, User $user)
+    {
+        return $user->update(['money_capital' => $data['money_capital']]);
+    }
+
+
 }
