@@ -17,10 +17,13 @@ class CalculateRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $this->merge([
-            'first_num' => format_number($this->first_num),
-            'second_num' => format_number($this->second_num),
-        ]);
+        if ($this->first_num && $this->second_num)
+        {
+            $this->merge([
+                'first_num' => format_number($this->first_num),
+                'second_num' => format_number($this->second_num),
+            ]);
+        }
     }
 
     public function rules(): array

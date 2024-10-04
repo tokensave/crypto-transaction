@@ -39,6 +39,10 @@
                 <x-table.text type="text" name="deal_id" value="{{ old('deal_id', $deal->deal_id) }}"/>
             </div>
 
+            <div class="mb-4">
+                <x-table.text type="text" name="created_at" value="{{ old('created_at', $deal->created_at) }}"/>
+            </div>
+
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Обновить сделку
             </button>

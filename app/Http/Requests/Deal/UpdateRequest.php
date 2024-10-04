@@ -37,7 +37,8 @@ class UpdateRequest extends FormRequest
             'provider' => ['required', 'string', Rule::enum(BanksEnum::class)],
             'cost' => ['nullable', 'string'],
             'deal_id' => ['required', 'string'],
-            'active_count' => ['required', 'string']
+            'active_count' => ['required', 'string'],
+            'created_at' => 'required|date_format:Y-m-d H:i:s'
         ];
     }
 

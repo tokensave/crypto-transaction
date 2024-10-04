@@ -64,6 +64,7 @@ class DealService
                 $data['cost'] ?? null,
                 $data['deal_id'],
                 $data['active_count'],
+                $data['created_at'],
             ));
         });
     }

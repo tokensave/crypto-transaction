@@ -20,6 +20,7 @@ class UpdateDealAction
             'cost' => $data->cost,
             'deal_id' => $data->deal_id,
             'active_count' => $data->active_count,
+            'created_at' => $data->created_at,
         ]);
     }
 
