@@ -17,5 +17,6 @@ class UpdateDealData
         public readonly ?string $cost,
         public readonly string $deal_id,
         public readonly string $active_count,
+        public readonly string $created_at,
     ){}
 }

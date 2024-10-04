@@ -28,6 +28,7 @@ class Deal extends Model
         'deal_id',
         'report_id',
         'user_id',
+        'created_at',
     ];
 
     protected $casts = [
