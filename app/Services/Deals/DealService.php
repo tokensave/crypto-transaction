@@ -7,6 +7,7 @@ use App\Actions\Deals\CreateDealData;
 use App\Actions\Deals\UpdateDealAction;
 use App\Actions\Deals\UpdateDealData;
 use App\Enums\ActionsActiveEnum;
+use App\Enums\CryptoActiveEnum;
 use App\Enums\CryptoExchangeEnum;
 use App\Models\Deal;
 use App\Models\Deals\Report;
@@ -14,6 +15,8 @@ use App\Models\User;
 use App\Support\Values\AmountValue;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class DealService
@@ -77,9 +80,50 @@ class DealService
 
     public function calculate($data)
     {
-        $result = (($data['second_num']/$data['first_num'])-1)*100;
+        $result = (($data['second_num'] / $data['first_num']) - 1) * 100;
 
         return $result;
+    }
+
+    public function crossCalculate($data)
+    {
+        $result_one = $data['sum_buy'] / $data['course_buy'];
+
+        $response = Http::get('https://api.huobi.pro/market/tickers');
+        // Преобразуем JSON ответ в массив
+        $res = $response->json();
+
+        // Выбираем нужные курсы криптовалют, например, BTC/USDT и ETH/USDT
+        $cryptoRates = [
+            'BTC/USDT' => $this->getCryptoRate($res, 'btcusdt'),
+            'ETH/USDT' => $this->getCryptoRate($res, 'ethusdt'),
+        ];
+
+        if ($data['active_buy'] == CryptoActiveEnum::usdt->name) {
+            match ($data['active_sell']) {
+                CryptoActiveEnum::btc->name => $result_two = $result_one / $cryptoRates['BTC/USDT'],
+                CryptoActiveEnum::eth->name => $result_two = $result_one / $cryptoRates['ETH/USDT'],
+            };
+        } else {
+            match ($data['active_buy']) {
+                CryptoActiveEnum::btc->name => $result_two = $result_one * $cryptoRates['BTC/USDT'],
+                CryptoActiveEnum::eth->name => $result_two = $result_one * $cryptoRates['ETH/USDT'],
+            };
+        }
+
+
+        return $result_two;
+
+    }
+
+    private function getCryptoRate($data, $symbol)
+    {
+        foreach ($data['data'] as $ticker) {
+            if ($ticker['symbol'] === $symbol) {
+                return $ticker['close'];
+            }
+        }
+        return null;
     }
 
     public function addUserCapital($data, User $user)

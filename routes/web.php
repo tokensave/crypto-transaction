@@ -63,6 +63,7 @@ Route::middleware(['auth', 'online'])->group(function () {
         Route::delete('/dashboard/check/{id}', [DashboardController::class, 'deleteDeal'])->name('dashboard.deals.delete');
 
         Route::post('/dashboard/calculate', [DashboardController::class, 'calculate'])->name('dashboard.calculate');
+        Route::post('/dashboard/calculate/cross', [DashboardController::class, 'crossCalculate'])->name('dashboard.calculate.cross');
         Route::post('/dashboard/capital', [DashboardController::class, 'capital'])->name('dashboard.capital');
         Route::post('/dashboard/check/capital/change', [DashboardController::class, 'updateMoneyCapitalUser'])->name('dashboard.capital.update');
         Route::get('/dashboard/check/pdf', [DashboardController::class, 'downloadDeals'])->name('dashboard.deals.download');

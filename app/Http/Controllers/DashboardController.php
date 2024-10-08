@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Deal\CalculateRequest;
+use App\Http\Requests\Deal\CrossCalculateRequest;
 use App\Http\Requests\Deal\StoreRequest;
 use App\Http\Requests\Deal\UpdateRequest;
 use App\Http\Requests\User\Settings\MoneyCapital\CapitalChangeRequest;
@@ -65,6 +66,15 @@ class DashboardController extends Controller
     {
         $result = $dealService->calculate($request->validated());
         return view('dashboard.index', compact('result'));
+    }
+
+    public function crossCalculate(CrossCalculateRequest $request, DealService $dealService)
+    {
+        $crossResult = $dealService->crossCalculate($request->validated());
+        $profit_rub = ($crossResult * $request['course_sell']) - $request['sum_buy'];
+        $profit = ((($crossResult * $request['course_sell']) / $request['sum_buy']) - 1) * 100;
+
+        return view('dashboard.index', compact('profit_rub', 'profit'));
     }
 
     public function downloadDeals()
