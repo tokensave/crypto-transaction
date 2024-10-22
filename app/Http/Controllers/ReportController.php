@@ -9,9 +9,16 @@ class ReportController extends Controller
 {
     public function info(Request $request, ReportService $service)
     {
-        $date = $request->input('date');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
 
-        $report = $service->store($request->user(), $date);
+        // Если конечная дата не указана, то устанавливаем её равной начальной дате
+        if (!$endDate) {
+            $endDate = $startDate;
+        }
+
+        // Генерация отчета за указанный период
+        $report = $service->store($request->user(), $startDate, $endDate);
 
         return view('report.generate', compact('report'));
     }
