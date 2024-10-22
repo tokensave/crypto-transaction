@@ -10,9 +10,16 @@ use App\Models\User;
 class ReportService
 {
 
-    public function store(User $user, string $date)
+    public function store(User $user, string $startDate, string $endDate)
     {
-        $deals = $user->deals()->whereDate('created_at', $date)->get();
+        $deals = $user->deals()->whereBetween('created_at', [$startDate, $endDate])
+            ->get();
+
+        // Проверяем, если есть сделки, используем первую для получения отчета
+        if ($deals->isEmpty()) {
+            // Если нет сделок, возвращаем пустой отчет или кидаем исключение
+            throw new \Exception('Нет сделок за указанный период.');
+        }
         $report = $deals->first()->report;
 
         $capital = $user->money_capital->value();
