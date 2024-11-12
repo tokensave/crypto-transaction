@@ -65,7 +65,7 @@ class DashboardController extends Controller
     public function calculate(CalculateRequest $request, DealService $dealService)
     {
         $result = $dealService->calculate($request->validated());
-        return view('dashboard.index', compact('result'));
+        return view('dashboard.tools', compact('result'));
     }
 
     public function crossCalculate(CrossCalculateRequest $request, DealService $dealService)
@@ -74,7 +74,7 @@ class DashboardController extends Controller
         $profit_rub = ($crossResult * $request['course_sell']) - $request['sum_buy'];
         $profit = ((($crossResult * $request['course_sell']) / $request['sum_buy']) - 1) * 100;
 
-        return view('dashboard.index', compact('profit_rub', 'profit'));
+        return view('dashboard.tools', compact('profit_rub', 'profit'));
     }
 
     public function downloadDeals()
