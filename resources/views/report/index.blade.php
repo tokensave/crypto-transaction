@@ -13,6 +13,9 @@
                 <x-menu.link to="{{ route('report.index') }}">
                     Отчет
                 </x-menu.link>
+                <x-menu.link to="{{ route('dashboard.tools') }}">
+                    Инструменты
+                </x-menu.link>
                 <x-menu.link to="{{ route('user.settings') }}">
                     Настройки
                 </x-menu.link>
