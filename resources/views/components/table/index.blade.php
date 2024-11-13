@@ -1,3 +1,5 @@
-<table class="table-auto text-white border-separate space-y-6 text-sm">
-        {{ $slot }}
-</table>
+<div class="overflow-auto">
+    <table class="table-auto w-full text-white border-separate border-spacing-y-2 text-sm">
+            {{ $slot }}
+    </table>
+</div>
