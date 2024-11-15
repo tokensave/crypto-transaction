@@ -33,49 +33,49 @@
                 <!-- Актив -->
                 <div class="flex flex-col">
                     <label class="text-center font-semibold">Актив</label>
-                    <x-table.select name="active" :options="App\Enums\CryptoActiveEnum::select()" class="bg-transparent w-full" placeholder="Выбрать"/>
+                    <x-form.select name="active" :options="App\Enums\CryptoActiveEnum::select()" class="bg-transparent w-full" placeholder="Выбрать"/>
                 </div>
 
                 <!-- Биржа -->
                 <div class="flex flex-col">
                     <label class="text-center font-semibold">Биржа</label>
-                    <x-table.select name="crypto_exchange" :options="App\Enums\CryptoExchangeEnum::select()" class="bg-transparent w-full" placeholder="Выбрать"/>
+                    <x-form.select name="crypto_exchange" :options="App\Enums\CryptoExchangeEnum::select()" class="bg-transparent w-full" placeholder="Выбрать"/>
                 </div>
 
                 <!-- Действие с активом -->
                 <div class="flex flex-col">
                     <label class="text-center font-semibold">Действие</label>
-                    <x-table.select name="action" :options="App\Enums\ActionsActiveEnum::select()" class="bg-transparent w-full" placeholder="Выбрать"/>
+                    <x-form.select name="action" :options="App\Enums\ActionsActiveEnum::select()" class="bg-transparent w-full" placeholder="Выбрать"/>
                 </div>
 
                 <!-- Курс -->
                 <div class="flex flex-col">
-                    <label class="text-center font-semibold">Курс</label>
-                    <x-table.text type="text" name="course" placeholder="Введите курс" class="w-full"/>
+                    <label class="text-center font-semibold mb-3">Курс</label>
+                    <x-form.text type="text" name="course" placeholder="Введите курс"/>
                 </div>
 
                 <!-- Сумма -->
                 <div class="flex flex-col">
-                    <label class="text-center font-semibold">Сумма</label>
-                    <x-table.text type="text" name="sum" placeholder="Введите сумму" class="w-full"/>
+                    <label class="text-center font-semibold mb-3">Сумма</label>
+                    <x-form.text type="text" name="sum" placeholder="Введите сумму"/>
                 </div>
 
                 <!-- Банк -->
                 <div class="flex flex-col">
                     <label class="text-center font-semibold">Банк</label>
-                    <x-table.select name="provider" :options="App\Enums\BanksEnum::select()" class="bg-transparent w-full" placeholder="Выбрать"/>
+                    <x-form.select name="provider" :options="App\Enums\BanksEnum::select()" class="bg-transparent w-full" placeholder="Выбрать"/>
                 </div>
 
                 <!-- Комиссия биржи -->
                 <div class="flex flex-col">
-                    <label class="text-center font-semibold">Комиссия биржи</label>
-                    <x-table.text type="text" name="cost" placeholder="Введите комиссию" class="w-full"/>
+                    <label class="text-center font-semibold mb-3">Комиссия биржи</label>
+                    <x-form.text type="text" name="cost" placeholder="Введите комиссию"/>
                 </div>
 
                 <!-- Идентификатор сделки -->
                 <div class="flex flex-col">
-                    <label class="text-center font-semibold">ID сделки</label>
-                    <x-table.text type="text" name="deal_id" placeholder="Введите номер" class="w-full"/>
+                    <label class="text-center font-semibold mb-3">ID сделки</label>
+                    <x-form.text type="text" name="deal_id" placeholder="Введите номер"/>
                 </div>
 
                 <!-- Кнопка добавления -->

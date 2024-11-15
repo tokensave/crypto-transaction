@@ -43,7 +43,7 @@
                 <x-table.text type="text" name="created_at" value="{{ old('created_at', $deal->created_at) }}"/>
             </div>
 
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button type="submit" class="w-full lg:w-auto px-10 py-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">
                 Обновить сделку
             </button>
         </form>
