@@ -44,7 +44,7 @@
 
                 <!-- Кнопка Сформировать отчет -->
                 <div class="col-span-full mt-4 text-center">
-                    <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <button type="submit" class="w-full lg:w-auto px-10 py-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">
                         Сформировать отчет
                     </button>
                 </div>
@@ -52,6 +52,5 @@
             </div>
         </form>
     </div>
-
 
 </x-layouts.base>
