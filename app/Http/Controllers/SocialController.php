@@ -38,7 +38,7 @@ class SocialController extends Controller
             ]);
 
         if (is_null($social->user_id)) {
-            $user = User::query()->create(['password' => Str::random(12)]);
+            $user = User::query()->create(['password' => Str::random(12), 'money_capital' => "0"]);
             $social->user()->associate($user)->save();
         }
 
