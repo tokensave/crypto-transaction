@@ -1,27 +1,31 @@
 <x-layouts.base>
 
 <x-menu>
-    <x-menu.block>
-        <x-menu.button type="button"/>
-        <x-menu.option>
-            <x-menu.link to="{{ route('dashboard.index') }}">
-                Главная панель
-            </x-menu.link>
-            <x-menu.link to="{{ route('dashboard.check') }}">
-                Сделки
-            </x-menu.link>
-            <x-menu.link to="{{ route('report.index') }}">
-                Отчет
-            </x-menu.link>
-            <x-menu.link to="{{ route('user.settings') }}">
-                Настройки
-            </x-menu.link>
-            <x-menu.link name="logout">
-                Выйти
-            </x-menu.link>
-        </x-menu.option>
-    </x-menu.block>
-</x-menu>
+        <x-menu.block>
+            <x-menu.button type="button"/>
+            <x-menu.option>
+                <x-menu.link to="{{ route('dashboard.index') }}">
+                    Главная панель
+                </x-menu.link>
+                <x-menu.link to="{{ route('dashboard.check') }}">
+                    Сделки
+                </x-menu.link>
+                <x-menu.link to="{{ route('report.index') }}">
+                    Отчет
+                </x-menu.link>
+                <x-menu.link to="{{ route('dashboard.tools') }}">
+                    Инструменты
+                </x-menu.link>
+                <x-menu.link to="{{ route('user.settings') }}">
+                    Настройки
+                </x-menu.link>
+                <x-menu.link name="logout">
+                    Выйти
+                </x-menu.link>
+            </x-menu.option>
+        </x-menu.block>
+    </x-menu>
+
 
 <div class="relative overflow-x-auto pt-6">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
