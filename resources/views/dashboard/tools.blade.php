@@ -32,8 +32,8 @@
         <form action="{{ route('dashboard.calculate') }}" method="POST"
               class="flex flex-col lg:flex-row items-center justify-center gap-y-4 lg:gap-x-4 bg-gray-900 p-4 rounded-lg w-full lg:w-auto">
             @csrf
-            <x-table.text type="text" name="first_num" placeholder="Первое число"/>
-            <x-table.text type="text" name="second_num" placeholder="Второе число"/>
+            <x-form.text type="text" name="first_num" placeholder="Первое число"/>
+            <x-form.text type="text" name="second_num" placeholder="Второе число"/>
             <button type="submit"
                     class="w-full lg:w-auto px-10 py-2 ml-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">
                 Посчитать
@@ -56,8 +56,8 @@
         <form action="{{ route('dashboard.calculate.cross') }}" method="POST"
               class="flex flex-col lg:flex-row items-center justify-center gap-y-4 lg:gap-x-4 bg-gray-900 p-4 rounded-lg w-full lg:w-auto">
             @csrf
-            <x-table.text type="text" name="course_buy" placeholder="Курс закупа"/>
-            <x-table.text type="text" name="sum_buy" placeholder="Сумма закупа"/>
+            <x-form.text type="text" name="course_buy" placeholder="Курс закупа"/>
+            <x-form.text type="text" name="sum_buy" placeholder="Сумма закупа"/>
             <select name="active_buy"
                     class="block w-full rounded-md border-0 py-2 pl-3 pr-10 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 bg-gray-900 text-white">
                 <option value="" disabled selected>Актив закупа</option>
@@ -72,7 +72,7 @@
                     <option value="{{ $key }}">{{ $value }}</option>
                 @endforeach
             </select>
-            <x-table.text type="text" name="course_sell" placeholder="Курс продажи"/>
+            <x-form.text type="text" name="course_sell" placeholder="Курс продажи"/>
             <button type="submit"
                     class="w-full lg:w-auto px-10 py-2 ml-2 bg-cyan-950 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300">
                 Посчитать

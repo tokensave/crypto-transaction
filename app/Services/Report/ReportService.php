@@ -6,12 +6,16 @@ use App\Enums\ActionsActiveEnum;
 use App\Enums\CryptoActiveEnum;
 use App\Enums\CryptoExchangeEnum;
 use App\Models\User;
+use Illuminate\Support\Carbon;
 
 class ReportService
 {
 
     public function store(User $user, string $startDate, string $endDate)
     {
+        $startDate = Carbon::parse($startDate)->startOfDay();
+        $endDate = Carbon::parse($endDate)->endOfDay();
+
         $deals = $user->deals()->whereBetween('created_at', [$startDate, $endDate])
             ->get();
 
