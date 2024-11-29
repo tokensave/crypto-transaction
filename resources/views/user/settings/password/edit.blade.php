@@ -49,6 +49,25 @@
 
         </x-list>
 
+        <x-list>
+            <x-list.item>
+
+                <x-slot:name>
+                    Потвердить с помощью
+                </x-slot:name>
+
+                <x-slot:value>
+                    <div class="grid grid-cols-2">
+                        <div class="col-span-2 md:col-span-1">
+                            <x-form.select name="provider" :options="App\Enums\UserNotificationsEnum::select()"/>
+                        </div>
+                    </div>
+                </x-slot:value>
+
+            </x-list.item>
+
+        </x-list>
+
         <x-form.footer>
 
             <x-slot:buttons>

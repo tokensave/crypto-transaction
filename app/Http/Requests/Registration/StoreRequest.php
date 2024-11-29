@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
             'password' => ['required', 'string', Password::defaults(), 'confirmed'],
             'agreement' => ['accepted'],
             'money_capital' => ['required', 'string'],
-            'g-recaptcha-response' => ['required', 'captcha'],
+            // 'g-recaptcha-response' => ['required', 'captcha'],
         ];
     }
 }

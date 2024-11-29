@@ -78,6 +78,10 @@ Route::middleware(['auth', 'online'])->group(function () {
         Route::view('/report', 'report.index')->name('report.index');
         Route::get('/report/info', [ReportController::class, 'info'])->name('report.info');
 
+        Route::get('/user/settings/password/confirm/{confirmation}', [UserPasswordController::class, 'confirm'])
+            ->name('user.settings.password.confirm');
+        Route::post('/user/settings/password/verify/{confirmation}', [UserPasswordController::class, 'verify'])
+            ->name('user.settings.password.verify');
     });
 });
 
